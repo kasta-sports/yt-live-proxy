@@ -15,7 +15,8 @@ app.get("/live", (req, res) => {
   exec(cmd, (error, stdout, stderr) => {
     if (error) {
       console.error(`yt-dlp error: ${error.message}`);
-      return res.status(500).send("Error fetching stream URL");
+      console.error(stderr);
+      return res.status(500).send(`Error fetching stream URL: ${error.message}`);
     }
     if (stderr) {
       console.error(`yt-dlp stderr: ${stderr}`);
